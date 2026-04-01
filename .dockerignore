@@ -1,0 +1,10 @@
+.git
+.gitignore
+.next
+node_modules
+.env*
+npm-debug.log*
+src/screenshots
+AGENTS.md
+CLAUDE.md
+PURPOSE.md

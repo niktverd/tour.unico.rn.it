@@ -34,3 +34,21 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Dokploy
+
+This project is prepared for Dokploy as an `Application` with deployment type `Docker`.
+
+- Build context: repository root
+- Dockerfile: `./Dockerfile`
+- Exposed container port: `3000`
+- Start command: baked into the image as `node server.js`
+
+The image uses Next.js standalone output, so Dokploy only needs to build the Dockerfile from this repository.
+
+To test locally with Podman:
+
+```bash
+podman build -t tour-unico-dokploy .
+podman run --rm -p 3000:3000 tour-unico-dokploy
+```
