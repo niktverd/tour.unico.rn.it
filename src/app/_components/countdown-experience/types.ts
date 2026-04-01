@@ -8,6 +8,18 @@ export type SparkState = {
   y: number;
 };
 
+export type SurpriseEdge = "top" | "right" | "bottom" | "left";
+
+export type SurpriseImageState = {
+  edge: SurpriseEdge;
+  key: number;
+  phase: "visible" | "leaving";
+  rotation: number;
+  src: string;
+  x: number;
+  y: number;
+};
+
 export type EventTheme = {
   accent: string;
   detail: string;

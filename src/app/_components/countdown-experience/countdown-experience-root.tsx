@@ -39,6 +39,7 @@ export default function CountdownExperienceRoot() {
     resetPointerPosition,
     sceneRef,
     spark,
+    surpriseImage,
     triggerSpark,
   } = useSceneInteractions();
 
@@ -185,7 +186,11 @@ export default function CountdownExperienceRoot() {
           />
         </div>
 
-        <SceneMotionEffects gustKey={gustKey} spark={spark} />
+        <SceneMotionEffects
+          gustKey={gustKey}
+          spark={spark}
+          surpriseImage={surpriseImage}
+        />
       </section>
     </main>
   );

@@ -1,6 +1,36 @@
-import type { EventTheme } from "./types";
+import type { EventTheme, SurpriseEdge } from "./types";
 
 export const DEFAULT_SPARK_POSITION = { x: 78, y: 18 };
+export const SURPRISE_HIDE_DURATION_MS = 680;
+export const SURPRISE_VISIBLE_DURATION_MS = 3200;
+export const TRIPLE_TAP_DISTANCE_PX = 72;
+export const TRIPLE_TAP_WINDOW_MS = 560;
+export const SURPRISE_EDGES: SurpriseEdge[] = [
+  "top",
+  "right",
+  "bottom",
+  "left",
+];
+export const SURPRISE_IMAGE_SOURCES = [
+  "/egyptian-gods-anubis-flat-by-Vexels.png",
+  "/egyptian-gods-isis-flat-by-Vexels.png",
+  "/egyptian-gods-ra-flat-by-Vexels.png",
+  "/egyptian-gods-seth-flat-by-Vexels.png",
+  "/egyptian-symbol-bastet-hand-drawn-by-Vexels.png",
+  "/egyptian-symbol-cleopatra-hand-drawn-by-Vexels.png",
+  "/egyptian-symbol-mummy-hand-drawn-by-Vexels.png",
+  "/egyptian-symbol-pyramid-hand-drawn-by-Vexels.png",
+  "/hand-drawn-camel-egypt-symbol-by-Vexels.png",
+  "/hand-drawn-egypt-deity-head-symbol-by-Vexels.png",
+  "/—Pngtree—illustration anubis head premium_15978485.png",
+  "/—Pngtree—ancient egyptian pyramids with winged_23914551.png",
+  "/pyramid.webp",
+  "/pharaon-masks.webp",
+  "/e3ca75673c250874a8fe207b2850c6cd.webp",
+  "/641fd984e1a1c5e8304cefe98dd8280c.webp",
+  "/49d377285fdf91aa7c52ca96a585f15b.webp",
+  "/9e552d3a0b13e642d2330ab96c597508.webp",
+] as const;
 
 export const EVENT_THEMES: Record<string, EventTheme> = {
   "nqz-departure": {
