@@ -2,8 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Egypt Escape Countdown",
-    short_name: "Egypt Countdown",
+    id: "/",
+    name: "Egypt",
+    short_name: "Egypt",
     description:
       "A one-screen countdown PWA for the next moment in the Egypt vacation plan.",
     start_url: "/",
@@ -16,19 +17,19 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ["travel", "lifestyle"],
     icons: [
       {
-        src: "/icon-192.svg",
+        src: "/icon-192.png",
         sizes: "192x192",
-        type: "image/svg+xml",
+        type: "image/png",
       },
       {
-        src: "/icon-512.svg",
+        src: "/icon-512.png",
         sizes: "512x512",
-        type: "image/svg+xml",
+        type: "image/png",
       },
       {
-        src: "/maskable-icon.svg",
+        src: "/maskable-icon.png",
         sizes: "512x512",
-        type: "image/svg+xml",
+        type: "image/png",
         purpose: "maskable",
       },
     ],
@@ -40,9 +41,9 @@ export default function manifest(): MetadataRoute.Manifest {
         url: "/",
         icons: [
           {
-            src: "/icon-192.svg",
+            src: "/icon-192.png",
             sizes: "192x192",
-            type: "image/svg+xml",
+            type: "image/png",
           },
         ],
       },
