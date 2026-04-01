@@ -1,10 +1,9 @@
 :root {
   --font-body:
-    "Iowan Old Style", "Palatino Linotype", "URW Palladio L", "Book Antiqua",
-    Georgia, serif;
+    "Avenir Next", "Avenir Next Condensed", "Gill Sans", "Trebuchet MS",
+    "Segoe UI", sans-serif;
   --font-display:
-    Baskerville, "Big Caslon", "Palatino Linotype", "Book Antiqua", Georgia,
-    serif;
+    Herculanum, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
   color-scheme: dark;
 }
 
