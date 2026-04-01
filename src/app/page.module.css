@@ -16,7 +16,6 @@
   --theme-accent: #efb466;
   --theme-detail: rgba(58, 28, 18, 0.72);
   --theme-glow: rgba(239, 180, 102, 0.36);
-  --theme-image: none;
   --theme-shadow: rgba(25, 14, 10, 0.84);
   position: relative;
   width: min(100%, 460px);
@@ -42,15 +41,27 @@
 }
 
 .imageLayer {
+  --scene-image: none;
   background-image:
     linear-gradient(180deg, rgba(14, 8, 10, 0.08) 0%, rgba(10, 8, 14, 0.34) 32%, rgba(8, 10, 18, 0.86) 74%, rgba(9, 11, 19, 0.98) 100%),
     linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.28) 100%),
-    var(--theme-image);
+    var(--scene-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  transform: scale(1.03);
+  transform: scale(1.06);
   z-index: 0;
+}
+
+.imageLayerCurrent {
+  animation: imageDrift 20s ease-in-out infinite alternate;
+}
+
+.imageLayerFade {
+  z-index: 1;
+  animation:
+    imageDrift 20s ease-in-out infinite alternate,
+    imageFadeOut 720ms ease forwards;
 }
 
 .scene::before {
@@ -697,6 +708,33 @@
   }
 }
 
+@keyframes imageDrift {
+  0% {
+    transform: scale(1.06) translate3d(-10px, -6px, 0);
+    filter: saturate(0.98);
+  }
+
+  50% {
+    transform: scale(1.1) translate3d(8px, -12px, 0);
+    filter: saturate(1.04);
+  }
+
+  100% {
+    transform: scale(1.08) translate3d(-6px, 10px, 0);
+    filter: saturate(1);
+  }
+}
+
+@keyframes imageFadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
 @keyframes nextCardPulse {
   0%,
   100% {
@@ -858,5 +896,14 @@
   .eventCardNext,
   .eventCard[data-state="next"]::after {
     animation: none;
+  }
+
+  .imageLayerCurrent {
+    animation: none;
+  }
+
+  .imageLayerFade {
+    animation: none;
+    opacity: 0;
   }
 }

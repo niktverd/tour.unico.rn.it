@@ -109,7 +109,6 @@ export function getThemeStyle(event: VacationEvent): CSSProperties {
     "--theme-accent": theme.accent,
     "--theme-detail": theme.detail,
     "--theme-glow": theme.glow,
-    "--theme-image": `url("${event.image}")`,
     "--theme-shadow": theme.shadow,
   } as CSSProperties;
 }

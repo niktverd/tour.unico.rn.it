@@ -10,6 +10,7 @@ type EventTimelineProps = {
   focusedEventId: string;
   onSelectEvent: (event: VacationEvent) => void;
   onTriggerSpark: () => void;
+  registerTimelineRef: (element: HTMLElement | null) => void;
   registerEventCardRef: (
     eventId: string,
     element: HTMLButtonElement | null,
@@ -23,6 +24,7 @@ export function EventTimeline({
   focusedEventId,
   onSelectEvent,
   onTriggerSpark,
+  registerTimelineRef,
   registerEventCardRef,
   upcomingEvent,
 }: EventTimelineProps) {
@@ -31,6 +33,7 @@ export function EventTimeline({
       aria-label="Маршрут по поездке"
       className={styles.timeline}
       data-state={eventState}
+      ref={registerTimelineRef}
     >
       <div className={styles.eventCardRow}>
         {events.map((event) => {

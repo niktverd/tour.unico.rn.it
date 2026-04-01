@@ -24,7 +24,10 @@ import { useSceneInteractions } from "./use-scene-interactions";
 
 export default function CountdownExperienceRoot() {
   const eventCardRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const timelineRef = useRef<HTMLElement | null>(null);
+  const previousImageRef = useRef(eventsData[0].image);
   const [focusedEventId, setFocusedEventId] = useState<string | null>(null);
+  const [fadingImage, setFadingImage] = useState<string | null>(null);
   const [nowMs, setNowMs] = useState<number | null>(null);
   const {
     gustKey,
@@ -79,6 +82,7 @@ export default function CountdownExperienceRoot() {
   const focusedEvent =
     eventsData.find((event) => event.id === focusedEventId) ?? fallbackEvent;
   const countdownParts = getCountdownParts(nowMs, focusedEvent);
+  const activeImage = focusedEvent.image;
   const localEventDateTime =
     typeof window === "undefined"
       ? null
@@ -87,16 +91,44 @@ export default function CountdownExperienceRoot() {
   const focusedState = getEventState(focusedEvent, upcomingEvent);
 
   useEffect(() => {
-    const selectedEventCard = eventCardRefs.current[focusedEvent.id];
+    const previousImage = previousImageRef.current;
 
-    if (!selectedEventCard) {
+    if (!previousImage || previousImage === activeImage) {
+      previousImageRef.current = activeImage;
       return;
     }
 
-    selectedEventCard.scrollIntoView({
+    setFadingImage(previousImage);
+    previousImageRef.current = activeImage;
+
+    const timeoutId = window.setTimeout(() => {
+      setFadingImage(null);
+    }, 720);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [activeImage]);
+
+  useEffect(() => {
+    const timeline = timelineRef.current;
+    const selectedEventCard = eventCardRefs.current[focusedEvent.id];
+
+    if (!timeline || !selectedEventCard) {
+      return;
+    }
+
+    const timelineRect = timeline.getBoundingClientRect();
+    const cardRect = selectedEventCard.getBoundingClientRect();
+    const nextScrollLeft =
+      timeline.scrollLeft +
+      (cardRect.left - timelineRect.left) -
+      (timelineRect.width - cardRect.width) / 2;
+    const maxScrollLeft = timeline.scrollWidth - timeline.clientWidth;
+
+    timeline.scrollTo({
       behavior: "smooth",
-      block: "nearest",
-      inline: "center",
+      left: Math.min(Math.max(nextScrollLeft, 0), Math.max(maxScrollLeft, 0)),
     });
   }, [focusedEvent.id]);
 
@@ -113,6 +145,10 @@ export default function CountdownExperienceRoot() {
     eventCardRefs.current[eventId] = element;
   }
 
+  function registerTimelineRef(element: HTMLElement | null) {
+    timelineRef.current = element;
+  }
+
   return (
     <main className={styles.page}>
       <section
@@ -127,7 +163,7 @@ export default function CountdownExperienceRoot() {
         onWheel={handleWheel}
         style={sceneStyle}
       >
-        <SceneBackdrop />
+        <SceneBackdrop activeImage={activeImage} fadingImage={fadingImage} />
 
         <div className={styles.frame}>
           <CountdownHero
@@ -143,6 +179,7 @@ export default function CountdownExperienceRoot() {
             focusedEventId={focusedEvent.id}
             onSelectEvent={handleEventSelection}
             onTriggerSpark={triggerSpark}
+            registerTimelineRef={registerTimelineRef}
             registerEventCardRef={registerEventCardRef}
             upcomingEvent={upcomingEvent}
           />
