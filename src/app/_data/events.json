@@ -1,0 +1,30 @@
+[
+  {
+    "id": "cairo-touchdown",
+    "name": "Touch Down In Cairo",
+    "place": "Cairo",
+    "startsAt": "2026-04-24T08:00:00+06:00",
+    "description": "Vacation begins the moment the wheels kiss the runway."
+  },
+  {
+    "id": "giza-sunrise",
+    "name": "Sunrise At Giza",
+    "place": "Giza Plateau",
+    "startsAt": "2026-04-25T06:30:00+06:00",
+    "description": "Golden light, giant pyramids, and zero need for subtlety."
+  },
+  {
+    "id": "nile-cruise",
+    "name": "Nile Dinner Cruise",
+    "place": "Nile River",
+    "startsAt": "2026-04-26T19:30:00+06:00",
+    "description": "Lantern glow, river breeze, and one very dramatic skyline."
+  },
+  {
+    "id": "red-sea-day",
+    "name": "Red Sea Escape",
+    "place": "Hurghada",
+    "startsAt": "2026-04-28T09:00:00+06:00",
+    "description": "Swap desert gold for bright water and an easy final exhale."
+  }
+]
