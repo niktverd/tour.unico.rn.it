@@ -1,6 +1,16 @@
 import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
+
+const headingFont = localFont({
+  src: "../../public/Asia AS (Fixed and edited)/AsiaAS-Normal.ttf",
+  display: "swap",
+  variable: "--font-heading",
+  fallback: ["Iowan Old Style", "Palatino Linotype", "Book Antiqua", "serif"],
+  adjustFontFallback: "Times New Roman",
+  declarations: [{ prop: "size-adjust", value: "132%" }],
+});
 
 export const metadata: Metadata = {
   applicationName: "Egypt Escape Countdown",
@@ -42,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html className={headingFont.variable} lang="en">
       <body>
         {process.env.NODE_ENV !== "production" ? (
           <Script id="dev-sw-reset" strategy="beforeInteractive">
