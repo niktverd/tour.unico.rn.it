@@ -134,17 +134,10 @@
   padding-top: 6px;
 }
 
-.eventButton {
+.eventHeader {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 14px;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  padding: 0;
   text-align: left;
-  cursor: pointer;
 }
 
 .eventName {
@@ -243,19 +236,35 @@
   color: rgba(255, 238, 204, 0.4);
 }
 
-.storyWrap {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 280ms ease;
+.eventMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  margin-top: -2px;
 }
 
-.storyWrap[data-open="true"] {
-  grid-template-rows: 1fr;
+.eventPlace,
+.eventLocalTime {
+  color: rgba(255, 239, 211, 0.68);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-align: center;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.eventPlace {
+  text-transform: uppercase;
+}
+
+.storyWrap {
+  display: block;
 }
 
 .storyRail {
-  min-height: 0;
-  overflow: hidden;
+  display: block;
 }
 
 .storyCard {
@@ -786,6 +795,12 @@
     font-size: clamp(5.2rem, 30vw, 8.2rem);
   }
 
+  .eventPlace,
+  .eventLocalTime {
+    font-size: 0.6rem;
+    letter-spacing: 0.07em;
+  }
+
   .timeline {
     margin-inline: -16px;
     padding-top: 18px;
@@ -836,7 +851,6 @@
   }
 
   .eventCard,
-  .eventChevron,
   .storyWrap {
     transition: none;
   }

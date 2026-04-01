@@ -3,40 +3,24 @@ import type { CountdownPart, EventState, VacationEvent } from "./types";
 
 type CountdownHeroProps = {
   countdownParts: CountdownPart[];
-  detailsOpen: boolean;
   eventState: EventState;
   focusedEvent: VacationEvent;
-  onToggleDetails: (timestamp: number) => void;
+  localEventDateTime: string | null;
 };
 
 export function CountdownHero({
   countdownParts,
-  detailsOpen,
   eventState,
   focusedEvent,
-  onToggleDetails,
+  localEventDateTime,
 }: CountdownHeroProps) {
   const [daysPart, ...timeParts] = countdownParts;
 
   return (
     <section className={styles.hero} data-state={eventState}>
-      <button
-        aria-expanded={detailsOpen}
-        className={styles.eventButton}
-        onClick={(event) => {
-          onToggleDetails(event.timeStamp);
-        }}
-        type="button"
-      >
+      <header className={styles.eventHeader}>
         <h1 className={styles.eventName}>{focusedEvent.name}</h1>
-        <span
-          aria-hidden="true"
-          className={styles.eventChevron}
-          data-open={detailsOpen}
-        >
-          +
-        </span>
-      </button>
+      </header>
 
       <div className={styles.countdownStage}>
         <div className={styles.daysBlock}>
@@ -67,7 +51,18 @@ export function CountdownHero({
         </div>
       </div>
 
-      <div className={styles.storyWrap} data-open={detailsOpen}>
+      <div className={styles.eventMeta}>
+        <p className={styles.eventPlace}>{focusedEvent.place}</p>
+        <time
+          className={styles.eventLocalTime}
+          dateTime={focusedEvent.startsAt}
+          suppressHydrationWarning
+        >
+          {localEventDateTime ?? ""}
+        </time>
+      </div>
+
+      <div className={styles.storyWrap}>
         <div className={styles.storyRail}>
           <p className={styles.storyCard}>{focusedEvent.description}</p>
         </div>

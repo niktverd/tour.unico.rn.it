@@ -13,6 +13,7 @@ import { CountdownHero } from "./countdown-hero";
 import { EventTimeline } from "./event-timeline";
 import {
   findUpcomingEvent,
+  formatLocalEventDateTime,
   getCountdownParts,
   getEventState,
   getThemeStyle,
@@ -23,7 +24,6 @@ import { useSceneInteractions } from "./use-scene-interactions";
 
 export default function CountdownExperienceRoot() {
   const eventCardRefs = useRef<Record<string, HTMLButtonElement | null>>({});
-  const [detailsOpen, setDetailsOpen] = useState(false);
   const [focusedEventId, setFocusedEventId] = useState<string | null>(null);
   const [nowMs, setNowMs] = useState<number | null>(null);
   const {
@@ -36,7 +36,6 @@ export default function CountdownExperienceRoot() {
     resetPointerPosition,
     sceneRef,
     spark,
-    triggerGust,
     triggerSpark,
   } = useSceneInteractions();
 
@@ -80,6 +79,10 @@ export default function CountdownExperienceRoot() {
   const focusedEvent =
     eventsData.find((event) => event.id === focusedEventId) ?? fallbackEvent;
   const countdownParts = getCountdownParts(nowMs, focusedEvent);
+  const localEventDateTime =
+    typeof window === "undefined"
+      ? null
+      : formatLocalEventDateTime(focusedEvent.startsAt);
   const sceneStyle = getThemeStyle(focusedEvent);
   const focusedState = getEventState(focusedEvent, upcomingEvent);
 
@@ -97,15 +100,9 @@ export default function CountdownExperienceRoot() {
     });
   }, [focusedEvent.id]);
 
-  function handleToggleDetails(timestamp: number) {
-    setDetailsOpen((open) => !open);
-    triggerGust(timestamp);
-  }
-
   function handleEventSelection(event: VacationEvent) {
     startTransition(() => {
       setFocusedEventId(event.id);
-      setDetailsOpen(false);
     });
   }
 
@@ -135,10 +132,9 @@ export default function CountdownExperienceRoot() {
         <div className={styles.frame}>
           <CountdownHero
             countdownParts={countdownParts}
-            detailsOpen={detailsOpen}
             eventState={focusedState}
             focusedEvent={focusedEvent}
-            onToggleDetails={handleToggleDetails}
+            localEventDateTime={localEventDateTime}
           />
 
           <EventTimeline

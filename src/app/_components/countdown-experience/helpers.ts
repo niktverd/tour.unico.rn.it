@@ -92,6 +92,16 @@ export function getTimelineDateParts(startsAt: string) {
   };
 }
 
+export function formatLocalEventDateTime(startsAt: string) {
+  return new Intl.DateTimeFormat(undefined, {
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZoneName: "short",
+  }).format(new Date(startsAt));
+}
+
 export function getThemeStyle(event: VacationEvent): CSSProperties {
   const theme = EVENT_THEMES[event.id] ?? EVENT_THEMES["vacation-start"];
 
